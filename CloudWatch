@@ -1,0 +1,43 @@
+apt update -y
+apt install apache2 -y
+
+cd /var/www/html/
+ll
+vi index.html (change to any text)
+cd
+cd /var/log/apache2/
+ll
+cd
+
+**************************Attach IAM role********************************
+sudo apt update
+sudo apt install awscli -y
+aws --version
+
+sudo apt update
+wget https://amazoncloudwatch-agent.s3.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+sudo dpkg -i amazon-cloudwatch-agent.deb
+cd /opt/aws/amazon-cloudwatch-agent/etc
+
+vi amazon-cloudwatch-agent.json
+{
+  "logs": {
+    "logs_collected": {
+      "files": {
+        "collect_list": [
+          {
+            "file_path": "/var/log/apache2/access.log",
+            "log_group_name": "ApacheAccessLogs",
+            "log_stream_name": "{instance_id}"
+          }
+        ]
+      }
+    }
+  }
+}
+
+
+sudo systemctl stop amazon-cloudwatch-agent
+sudo systemctl status amazon-cloudwatch-agent
+sudo systemctl start amazon-cloudwatch-agent
+sudo systemctl status amazon-cloudwatch-agent
