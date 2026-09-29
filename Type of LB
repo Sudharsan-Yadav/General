@@ -1,0 +1,150 @@
+In AWS, there are mainly 4 types of Load Balancers under Elastic Load Balancing (ELB):
+
+1. Application Load Balancer (ALB) - Layer 7
+
+✅ Routes traffic based on URL path, hostname, headers, query strings.
+
+Real-time Example
+
+Imagine you're running an e-commerce website:
+
+www.shop.com/products  → Product Server
+www.shop.com/payments  → Payment Server
+www.shop.com/orders    → Order Server
+
+
+ALB can route requests like:
+
+/products → EC2 Group A
+/payments → EC2 Group B
+/orders   → EC2 Group C
+
+Companies Use It For
+E-commerce websites
+Web applications
+Microservices
+REST APIs
+
+Interview One-Liner:
+
+ALB is used for HTTP/HTTPS applications where routing decisions are based on URLs or hostnames.
+
+2. Network Load Balancer (NLB) - Layer 4
+
+✅ Routes traffic based on TCP, UDP, TLS.
+
+Real-time Example
+
+Suppose you have an online gaming application.
+
+Players connect using:
+
+TCP Port 443
+UDP Port 5000
+
+
+NLB forwards traffic with very low latency.
+
+Companies Use It For
+Online gaming
+Banking applications
+Trading platforms
+High-performance applications
+
+Interview One-Liner:
+
+NLB is used when ultra-high performance and low latency are required.
+
+3. Gateway Load Balancer (GWLB)
+
+✅ Used to deploy and scale security appliances.
+
+Real-time Example
+
+Company traffic flow:
+
+Internet
+   ↓
+Firewall
+   ↓
+IDS/IPS
+   ↓
+Application Servers
+
+
+GWLB distributes traffic across multiple firewalls.
+
+Companies Use It For
+Firewalls
+Intrusion Detection Systems (IDS)
+Security inspection
+Interview One-Liner
+
+GWLB is used to load balance security appliances such as firewalls and intrusion detection systems.
+
+4. Classic Load Balancer (CLB) - Legacy
+
+✅ Older generation load balancer.
+
+Real-time Example
+
+Suppose an old application has:
+
+EC2-1
+EC2-2
+EC2-3
+
+
+CLB distributes traffic among them.
+
+Companies Use It For
+Legacy applications
+Older AWS environments
+Interview One-Liner
+
+CLB is the older AWS load balancer and is generally replaced by ALB or NLB for new deployments.
+
+Easy Comparison
+Load Balancer	Layer	Best For	Example
+ALB	Layer 7	Websites & APIs	Amazon shopping site
+NLB	Layer 4	High-speed TCP/UDP apps	Online gaming app
+GWLB	Security Layer	Firewalls & IDS	Enterprise security setup
+CLB	Layer 4/7	Legacy apps	Old EC2 applications
+
+Real-World Architecture Example
+
+For a shopping website:
+
+Users
+  ↓
+Application Load Balancer
+  ↓
+EC2 Web Servers
+  ↓
+RDS Database
+
+
+For a bank:
+
+Users
+  ↓
+Network Load Balancer
+  ↓
+Banking Servers
+
+
+For a corporate network:
+
+Internet
+  ↓
+Gateway Load Balancer
+  ↓
+Firewall Fleet
+  ↓
+Application Servers
+
+AWS Exam Tip
+Website/API → ALB
+TCP/UDP & Low Latency → NLB
+Firewall/Security → GWLB
+Old Legacy Setup → CLB
